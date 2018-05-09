@@ -1,48 +1,48 @@
 <template>
     <div>
-        <!--<div class="geolocation" v-on:click="geolocation()">-->
-            <!--<img src="../assets/logo.png" />-->
-        <!--</div>-->
+        <div class="locate">
+            <div class="search">
+                <input type="text" placeholder="Location suchen" v-model="searchAddressInput" v-on:change="searchLocation()">
+            </div>
+            <div class="geolocation" v-on:click="geolocation()"></div>
+        </div>
+
+
         <GmapMap :center="currentLocation"
-                 :zoom="zoom"
-                 map-type-id="terrain"
+                 :options="mapOptions"
                  class="map">
-            <GmapMarker :key="index"
+            <!--<GmapMarker :key="index"
                         v-for="(m, index) in markers"
                         :position="m.position"
                         :clickable="true"
                         :draggable="true"
-                        @click="currentLocation=m.position"/>
+                        @click="currentLocation=m.position"/>-->
         </GmapMap>
-        <gmap-autocomplete @place_changed="setLocation"></gmap-autocomplete>
     </div>
 </template>
 
 <script>
-    import { has as _has } from 'lodash';
+    import {has as _has} from 'lodash';
 
     export default {
         name: 'GoogleMaps',
         data() {
             return {
-                markers: [{
-                    position: {
-                        lat: 10.0,
-                        lng: 10.0
-                    }
-                },{
-                    position: {
-                        lat: 11.0,
-                        lng: 11.0
-                    }
-                }],
                 currentLocation: {
-                    lat:10,
-                    lng:10
+                    lat: 10,
+                    lng: 10
                 },
-                zoom: 10,
-                searchAddressInput: ''
-            };
+                mapOptions: {
+                    zoom: 12,
+                    mapTypeId: "roadmap",
+                    streetViewControl: false,
+                    rotateControl: false,
+                    fullscreenControl: false,
+                    mapTypeControl: false,
+                    zoomControl: false
+                }
+            }
+                ;
         },
         mounted() {
             this.geolocation();
@@ -71,7 +71,7 @@
                 if (_has(location, 'geometry')) {
                     const lat = location.geometry.location.lat();
                     const lng = location.geometry.location.lng();
-                    this.currentLocation = { lat, lng };
+                    this.currentLocation = {lat, lng};
                 } else {
                     this.searchAddressInput = location.name;
                     this.searchLocation();
@@ -85,5 +85,16 @@
     .map {
         width: 100%;
         height: 100vh;
+    }
+
+    .locate {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        z-index: 5;
+        background-color: #2db6e9;
+        border: 1px solid #999;
+        line-height: 30px;
+        padding: 10px;
     }
 </style>
