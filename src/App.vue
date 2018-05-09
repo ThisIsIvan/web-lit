@@ -7,7 +7,7 @@
 
 <script>
     import HelloWorld from './components/HelloWorld.vue';
-    import GoogleMaps from './components/GoogleMaps';
+    import GoogleMaps from './components/GoogleMaps.vue';
 
     export default {
         name: 'app',
