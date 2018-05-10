@@ -5,17 +5,19 @@
                  :options="mapOptions"
                  class="map">
             <GmapMarker :position="locationMarkerPosition"/>
-            <GmapMarker :key="index"
-                        v-for="(m, index) in eventMarkers"
+            <GmapMarker :key="index" v-for="(m,index) in eventMarkers"
                         :position="m.position"
-                        :clickable="true"
-                        @click="currentLocation=m.position"/>
+                        :icon="m.eventIcon"
+                        :clickable="true"></GmapMarker>
         </GmapMap>
     </div>
 </template>
 
 <script>
+    //import {has as _has} from 'lodash';
     import SearchBar from "./SearchBar";
+    //import ImageBlue from "../assets/icon_blue.png"
+    import ImageRed from "../assets/icon_red.png"
 
     export default {
         name: 'GoogleMaps',
@@ -39,7 +41,13 @@
                     mapTypeControl: false,
                     zoomControl: false
                 },
-                eventMarkers: [{}],
+                eventMarkers: [{
+                    position: {
+                        lat: 47.370000,
+                        lng: 8.542297
+                    },
+                    eventIcon: ImageRed
+                }],
                 searchAddressInput: ''
             }
         },
@@ -63,7 +71,10 @@
                         lng: position.coords.longitude
                     }
                 });
-            }
+            },
+            /*getIcon(litMeter){
+
+            }*/
         }
     }
 </script>
