@@ -9,7 +9,8 @@
                         :clickable="false"></GmapMarker>
             <GmapMarker :key="index" v-for="(m,index) in eventMarkers"
                         :position="m.position"
-                        :icon="m.eventIcon"
+                        :litMeter="m.litMeter"
+                        :icon="getIcon(m.litMeter)"
                         :clickable="true"
                         v-on:click="setEventData"></GmapMarker>
         </GmapMap>
@@ -27,10 +28,10 @@
     import SearchBar from "./SearchBar";
     import SideBar from "./SideBar";
    // import ImageBlue from "../assets/icon_blue.png"
-    import ImageRed from "../assets/icon_red.png"
+    //import ImageRed from "../assets/icon_red.png"
     import PinBlue from "../assets/pin_big_blue.png"
     import PinRed from "../assets/pin_big_red.png"
-    import axios from "axios"
+    import firebase from 'firebase'
 
     export default {
         name: 'GoogleMaps',
@@ -54,14 +55,14 @@
                     mapTypeControl: false,
                     zoomControl: false
                 },
-                eventMarkers: [{
-                    position: {
-                        lat: 47.370000,
-                        lng: 8.542297
-                    },
-                    eventIcon: ImageRed
-                }],
-               // eventMarkers: [],
+                // eventMarkers: [{
+                //     position: {
+                //         lat: 47.370000,
+                //         lng: 8.542297
+                //     },
+                //     eventIcon: ImageRed
+                // }],
+                eventMarkers: [],
                 searchAddressInput: '',
                 eventName: " ",
                 eventLocation: " ",
@@ -73,7 +74,7 @@
         },
         mounted() {
             this.geolocation();
-            this.getEventMarkers();
+            this.getMarkers();
         },
         methods: {
             locationChanged(location) {
@@ -93,13 +94,17 @@
                     }
                 });
             },
-            getEventMarkers() {
-                axios.get("http://127.0.0.1:5000/events").then((response) => {
-                    console.log(response.data._items);
-                    this.eventMarkers = response.data._items;
-                }).catch((error) => {
-                    console.log(error)
-                })
+            getMarkers(){
+                var database = firebase.database().ref();
+                database.on('child_added', function (data) {
+                    console.log(data.val());
+                    try{
+                        this.eventMarkers = data.val();
+                        console.log("passed")
+                    } catch(e){
+                        console.log("Failed")
+                    }
+                });
             },
             getIcon(litMeter) {
                 if (litMeter > 10) {
