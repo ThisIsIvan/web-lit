@@ -8,8 +8,14 @@
             <GmapMarker :key="index" v-for="(m,index) in eventMarkers"
                         :position="m.position"
                         :icon="m.eventIcon"
-                        :clickable="true"></GmapMarker>
+                        :clickable="true"
+                        v-on:click="setEventData"></GmapMarker>
         </GmapMap>
+        <side-bar :name="eventName"
+                  :location="eventLocation"
+                  :website="eventWebsite"
+                  :time="eventTime"
+                  :show="showSidebar"></side-bar>
     </div>
 </template>
 
@@ -18,10 +24,11 @@
     import SearchBar from "./SearchBar";
     //import ImageBlue from "../assets/icon_blue.png"
     import ImageRed from "../assets/icon_red.png"
+    import SideBar from "./SideBar";
 
     export default {
         name: 'GoogleMaps',
-        components: {SearchBar},
+        components: {SideBar, SearchBar},
         data() {
             return {
                 currentLocation: {
@@ -48,7 +55,11 @@
                     },
                     eventIcon: ImageRed
                 }],
-                searchAddressInput: ''
+                eventName: " ",
+                eventLocation: " ",
+                eventWebsite: " ",
+                eventTime: " ",
+                showSidebar: false
             }
         },
         mounted() {
@@ -71,6 +82,14 @@
                         lng: position.coords.longitude
                     }
                 });
+            },
+            setEventData() {
+                this.eventName = "Nachtseminar";
+                console.log(this.eventName);
+                this.eventLocation = "Badenerstrasse 109, 8004 Zürich";
+                this.eventWebsite = "plaza-zürich.ch";
+                this.eventTime = "20:00 Uhr";
+                this.showSidebar = true;
             },
             /*getIcon(litMeter){
 
