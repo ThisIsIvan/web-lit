@@ -18,11 +18,9 @@
 <script>
     //import {has as _has} from 'lodash';
     import SearchBar from "./SearchBar";
-    import ImageBlue from "../assets/icon_blue.png"
-    import ImageRed from "../assets/icon_red.png"
     import PinBlue from "../assets/pin_big_blue.png"
     import PinRed from "../assets/pin_big_red.png"
-    import axios from "axios"
+    import firebase from 'firebase'
 
     export default {
         name: 'GoogleMaps',
@@ -52,7 +50,7 @@
         },
         mounted() {
             this.geolocation();
-            this.getEventMarkers();
+            this.getMarkers();
         },
         methods: {
             locationChanged(location) {
@@ -72,13 +70,17 @@
                     }
                 });
             },
-            getEventMarkers() {
-                axios.get("http://127.0.0.1:5000/events").then((response) => {
-                    console.log(response.data._items);
-                    this.eventMarkers = response.data._items;
-                }).catch((error) => {
-                    console.log(error)
-                })
+            getMarkers(){
+                var database = firebase.database().ref();
+                database.on('child_added', function (data) {
+                    console.log(data.val());
+                    try{
+                        this.eventMarkers = data.val();
+                        console.log("passed")
+                    } catch(e){
+                        console.log("Failed")
+                    }
+                });
             },
             getIcon(litMeter) {
                 if (litMeter > 10) {
