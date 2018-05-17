@@ -3,8 +3,10 @@
         <search-bar v-on:current-location-changed="locationChanged"></search-bar>
         <GmapMap :center="currentLocation"
                  :options="mapOptions"
+                 v-on:click="closeSideBar"
                  class="map">
-            <GmapMarker :position="locationMarkerPosition"/>
+            <GmapMarker :position="locationMarkerPosition"
+                        :clickable="false"></GmapMarker>
             <GmapMarker :key="index" v-for="(m,index) in eventMarkers"
                         :position="m.position"
                         :icon="m.eventIcon"
@@ -15,6 +17,7 @@
                   :location="eventLocation"
                   :website="eventWebsite"
                   :time="eventTime"
+                  :litMeter="eventLitMeter"
                   :show="showSidebar"></side-bar>
     </div>
 </template>
@@ -22,9 +25,12 @@
 <script>
     //import {has as _has} from 'lodash';
     import SearchBar from "./SearchBar";
-    //import ImageBlue from "../assets/icon_blue.png"
-    import ImageRed from "../assets/icon_red.png"
     import SideBar from "./SideBar";
+   // import ImageBlue from "../assets/icon_blue.png"
+    import ImageRed from "../assets/icon_red.png"
+    import PinBlue from "../assets/pin_big_blue.png"
+    import PinRed from "../assets/pin_big_red.png"
+    import axios from "axios"
 
     export default {
         name: 'GoogleMaps',
@@ -55,15 +61,19 @@
                     },
                     eventIcon: ImageRed
                 }],
+               // eventMarkers: [],
+                searchAddressInput: '',
                 eventName: " ",
                 eventLocation: " ",
                 eventWebsite: " ",
                 eventTime: " ",
+                eventLitMeter: 0,
                 showSidebar: false
             }
         },
         mounted() {
             this.geolocation();
+            this.getEventMarkers();
         },
         methods: {
             locationChanged(location) {
@@ -83,17 +93,33 @@
                     }
                 });
             },
+            getEventMarkers() {
+                axios.get("http://127.0.0.1:5000/events").then((response) => {
+                    console.log(response.data._items);
+                    this.eventMarkers = response.data._items;
+                }).catch((error) => {
+                    console.log(error)
+                })
+            },
+            getIcon(litMeter) {
+                if (litMeter > 10) {
+                    return PinBlue
+                } else {
+                    return PinRed
+                }
+            },
             setEventData() {
                 this.eventName = "Nachtseminar";
                 console.log(this.eventName);
                 this.eventLocation = "Badenerstrasse 109, 8004 Zürich";
                 this.eventWebsite = "plaza-zürich.ch";
                 this.eventTime = "20:00 Uhr";
+                this.eventLitMeter = 50;
                 this.showSidebar = true;
             },
-            /*getIcon(litMeter){
-
-            }*/
+            closeSideBar() {
+              this.showSidebar = false;
+            }
         }
     }
 </script>
