@@ -27,7 +27,7 @@
     //import {has as _has} from 'lodash';
     import SearchBar from "./SearchBar";
     import SideBar from "./SideBar";
-   // import ImageBlue from "../assets/icon_blue.png"
+    //import ImageBlue from "../assets/icon_blue.png"
     //import ImageRed from "../assets/icon_red.png"
     import PinBlue from "../assets/pin_big_blue.png"
     import PinRed from "../assets/pin_big_red.png"
@@ -55,13 +55,6 @@
                     mapTypeControl: false,
                     zoomControl: false
                 },
-                // eventMarkers: [{
-                //     position: {
-                //         lat: 47.370000,
-                //         lng: 8.542297
-                //     },
-                //     eventIcon: ImageRed
-                // }],
                 eventMarkers: [],
                 searchAddressInput: '',
                 eventName: " ",
@@ -75,6 +68,7 @@
         mounted() {
             this.geolocation();
             this.getMarkers();
+            this.changeMarker();
         },
         methods: {
             locationChanged(location) {
@@ -94,17 +88,28 @@
                     }
                 });
             },
-            getMarkers(){
-                var database = firebase.database().ref();
-                database.on('child_added', function (data) {
-                    console.log(data.val());
-                    try{
-                        this.eventMarkers = data.val();
-                        console.log("passed")
-                    } catch(e){
-                        console.log("Failed")
-                    }
+            getMarkers() {
+                var ref = firebase.database().ref('events');
+                var eventMarkers = [];
+                ref.on("child_added", function (snapshot) {
+                    console.log(snapshot.val());
+                    eventMarkers.push(snapshot.val());
                 });
+                this.eventMarkers = eventMarkers;
+
+            },
+            changeMarker(){
+                var ref = firebase.database().ref('events');
+                var changedMarker;
+                ref.on("child_changed", function(snapshot) {
+                    console.log(snapshot.val());
+                    changedMarker = snapshot.val();
+                });
+                var result = this.eventMarkers.filter(function( obj ) {
+                    return obj.name === changedMarker.name;
+                });
+                result = changedMarker;
+                console.log(result);
             },
             getIcon(litMeter) {
                 if (litMeter > 10) {
@@ -115,7 +120,6 @@
             },
             setEventData(index) {
                 this.eventName = this.eventMarkers[index].name;
-                console.log(this.eventName);
                 this.eventLocation = this.eventMarkers[index].position;
                 this.eventWebsite = "plaza-zürich.ch";
                 this.eventTime = this.eventMarkers[index].time;
@@ -123,7 +127,7 @@
                 this.showSidebar = true;
             },
             closeSideBar() {
-              this.showSidebar = false;
+                this.showSidebar = false;
             }
         }
     }
