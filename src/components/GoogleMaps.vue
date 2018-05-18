@@ -147,7 +147,6 @@
                 let minutes = time.getMinutes();
                 minutes = minutes< 10 ? '0'+minutes : minutes;
                 this.eventTime = time.getHours()+":"+minutes;
-
                 this.eventLitMeter = this.eventMarkers[index].litMeter;
 
             },
