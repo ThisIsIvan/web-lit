@@ -12,7 +12,7 @@
                         :litMeter="m.litMeter"
                         :icon="getIcon(m.litMeter)"
                         :clickable="true"
-                        v-on:click="setEventData"></GmapMarker>
+                        v-on:click="setEventData(index)"></GmapMarker>
         </GmapMap>
         <side-bar :name="eventName"
                   :location="eventLocation"
@@ -113,13 +113,13 @@
                     return PinRed
                 }
             },
-            setEventData() {
-                this.eventName = "Nachtseminar";
+            setEventData(index) {
+                this.eventName = this.eventMarkers[index].name;
                 console.log(this.eventName);
-                this.eventLocation = "Badenerstrasse 109, 8004 Zürich";
+                this.eventLocation = this.eventMarkers[index].position;
                 this.eventWebsite = "plaza-zürich.ch";
-                this.eventTime = "20:00 Uhr";
-                this.eventLitMeter = 50;
+                this.eventTime = this.eventMarkers[index].time;
+                this.eventLitMeter = this.eventMarkers[index].litMeter;
                 this.showSidebar = true;
             },
             closeSideBar() {
