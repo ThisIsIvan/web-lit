@@ -19,6 +19,7 @@
                   :website="eventWebsite"
                   :time="eventTime"
                   :litMeter="eventLitMeter"
+                  :index="eventindex"
                   :show="showSidebar"></side-bar>
     </div>
 </template>
@@ -62,6 +63,7 @@
                 eventWebsite: " ",
                 eventTime: " ",
                 eventLitMeter: 0,
+                eventindex: 0,
                 showSidebar: false
             }
         },
@@ -121,10 +123,11 @@
             setEventData(index) {
                 this.eventName = this.eventMarkers[index].name;
                 this.eventLocation = this.eventMarkers[index].position;
-                this.eventWebsite = "plaza-zürich.ch";
+                this.eventWebsite = this.eventMarkers[index].url;
                 this.eventTime = this.eventMarkers[index].time;
                 this.eventLitMeter = this.eventMarkers[index].litMeter;
                 this.showSidebar = true;
+                this.eventindex = index;
             },
             closeSideBar() {
                 this.showSidebar = false;

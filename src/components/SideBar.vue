@@ -4,21 +4,27 @@
         <div class="namecontainer">
             <h2 id="name" style="padding: 3vh; margin: 0"></h2>
         </div>
+
         <div class="iconcontainer"><i class="fas fa-map-marker-alt"></i></div>
         <div id="location" class="textcontainer"></div>
+
         <div class="iconcontainer"><i class="fas fa-globe"></i></div>
-        <div id="website" class="textcontainer"></div>
+        <div class="textcontainer"><a id="website" href=""></a></div>
+
         <div class="iconcontainer"><i class="fas fa-clock"></i></div>
         <div id="time" class="textcontainer"></div>
+
         <img class="litbtn" src="../assets/lit_button.png" v-on:click="increaseLitMeter"/>
         <div class="litcontainer">UP-VOTE THE EVENT</div>
         <div id="votes" class="litcontainer" style="margin-bottom: 8vh"></div>
+
         <div class="ticketbtn"><i class="fas fa-ticket-alt"></i> TICKETS</div>
         <div class="routebtn"><i class="fas fa-compass"></i> ROUTE</div>
     </div>
 </template>
 
 <script>
+    import firebase from 'firebase'
 
     export default {
         name: "SideBar",
@@ -27,7 +33,7 @@
                 lit: 0
             }
         },
-        props: ["name", "location", "website", "time", "litMeter", "show"],
+        props: ["name", "location", "website", "time", "litMeter", "show", "index"],
         updated: function() {
           this.setEventData();
         },
@@ -43,14 +49,21 @@
                 document.getElementById("name").innerText = this.name;
                 document.getElementById("location").innerText = this.location;
                 document.getElementById("website").innerText = this.website;
+                document.getElementById("website").href = this.website;
                 document.getElementById("time").innerText = this.time;
                 this.lit = this.litMeter;
                 document.getElementById("votes").innerText = this.lit + " Votes"
             },
             increaseLitMeter() {
                 this.lit++;
-                document.getElementById("votes").innerText = this.lit + " Votes"
-            }
+                document.getElementById("votes").innerText = this.lit + " Votes";
+                var ref = firebase.database().ref('events');
+                console.log(ref.child("0"));
+                ref.child(this.index).update({
+                    litMeter: this.lit
+                });
+            },
+
         }
     }
 </script>
