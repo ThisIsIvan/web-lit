@@ -45,7 +45,7 @@
                 document.getElementById("website").innerText = this.website;
                 document.getElementById("time").innerText = this.time;
                 this.lit = this.litMeter;
-                document.getElementById("votes").innerText = this.lit + " Votes"
+                document.getElementById("votes").innerText = this.lit + " Votes";
             },
             increaseLitMeter() {
                 this.lit++;
