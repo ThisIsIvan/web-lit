@@ -10,7 +10,7 @@
             <GmapMarker :key="index" v-for="(m,index) in eventMarkers"
                         :position="m.position"
                         :litMeter="m.litMeter"
-                        :icon="getIcon(m.litMeter)"
+                        :icon="getIcon(m.attendance, m.litMeter)"
                         :clickable="true"
                         v-on:click="setEventData(index)"></GmapMarker>
         </GmapMap>
@@ -25,14 +25,15 @@
 </template>
 
 <script>
-    //import {has as _has} from 'lodash';
     import SearchBar from "./SearchBar";
     import SideBar from "./SideBar";
-    //import ImageBlue from "../assets/icon_blue.png"
-    //import ImageRed from "../assets/icon_red.png"
+    import PinSmall from "../assets/pin_short.png"
+    import PinMiddle from "../assets/pin_middle.png"
+    import PinBig from "../assets/pin_big.png"
     import PinBlue from "../assets/pin_big_blue.png"
     import PinRed from "../assets/pin_big_red.png"
     import firebase from 'firebase'
+    import axios from 'axios'
 
     export default {
         name: 'GoogleMaps',
@@ -90,31 +91,53 @@
                     }
                 });
             },
+            reverseGeocoding(coordinates) {
+                console.log(coordinates);
+                axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
+                    .then(response => {
+                        console.log(response.data);
+                        this.eventLocation = response.data.results[0].formatted_address;
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    })
+            },
             getMarkers() {
-                var ref = firebase.database().ref('events');
-                var eventMarkers = [];
+                const ref = firebase.database().ref('events');
+                const eventMarkers = [];
                 ref.on("child_added", function (snapshot) {
                     console.log(snapshot.val());
                     eventMarkers.push(snapshot.val());
                 });
                 this.eventMarkers = eventMarkers;
+                this.$forceUpdate();
 
             },
-            changeMarker(){
-                var ref = firebase.database().ref('events');
-                var changedMarker;
-                ref.on("child_changed", function(snapshot) {
-                    console.log(snapshot.val());
+            changeMarker() {
+                const ref = firebase.database().ref('events');
+                let changedMarker;
+                const reef = this;
+                //var markers = this.eventMarkers;
+                ref.on("child_changed", function (snapshot) {
                     changedMarker = snapshot.val();
+                    console.log(snapshot.val());
+                    const name = changedMarker.name;
+                    const index = reef.eventMarkers.findIndex(x => x.name === name);
+                    reef.eventMarkers[index] = changedMarker;
+                    reef.$forceUpdate();
                 });
-                var result = this.eventMarkers.filter(function( obj ) {
-                    return obj.name === changedMarker.name;
-                });
-                result = changedMarker;
-                console.log(result);
             },
-            getIcon(litMeter) {
-                if (litMeter > 10) {
+            getIcon(attendance, litMeter) {
+                console.log("attendance: " + attendance + " litMeter:" + litMeter);
+                if (litMeter <= 20) {
+                    if (attendance <= 10) {
+                        return PinSmall
+                    } else if (attendance <= 20) {
+                        return PinMiddle
+                    } else {
+                        return PinBig
+                    }
+                } else if (litMeter <= 40) {
                     return PinBlue
                 } else {
                     return PinRed
@@ -122,11 +145,23 @@
             },
             setEventData(index) {
                 this.eventName = this.eventMarkers[index].name;
-                this.eventLocation = this.eventMarkers[index].position;
+                const coordinates = this.eventMarkers[index].position;
+                this.eventLocation = axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
+                    .then(response => {
+                        console.log(response.data);
+                        this.eventLocation = response.data.results[0].formatted_address;
+                        this.showSidebar = true;
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    });
                 this.eventWebsite = this.eventMarkers[index].url;
-                this.eventTime = this.eventMarkers[index].time;
+
+                const time = new Date(this.eventMarkers[index].time);
+                let minutes = time.getMinutes();
+                minutes = minutes< 10 ? '0'+minutes : minutes;
+                this.eventTime = time.getHours()+":"+minutes;
                 this.eventLitMeter = this.eventMarkers[index].litMeter;
-                this.showSidebar = true;
                 this.eventindex = index;
             },
             closeSideBar() {

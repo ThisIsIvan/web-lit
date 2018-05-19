@@ -1,6 +1,6 @@
 <template>
     <div id="sidebar" class="sidebar" v-show="show">
-        <div id="image" class="image"></div>
+        <img class="image" src="../assets/flame.png"/>
         <div class="namecontainer">
             <h2 id="name" style="padding: 3vh; margin: 0"></h2>
         </div>
@@ -18,7 +18,7 @@
         <div class="litcontainer">UP-VOTE THE EVENT</div>
         <div id="votes" class="litcontainer" style="margin-bottom: 8vh"></div>
 
-        <div class="ticketbtn"><i class="fas fa-ticket-alt"></i> TICKETS</div>
+        <div id="ticketButton" class="ticketbtn"><i class="fas fa-ticket-alt"></i> TICKETS</div>
         <div class="routebtn"><i class="fas fa-compass"></i> ROUTE</div>
     </div>
 </template>
@@ -52,13 +52,13 @@
                 document.getElementById("website").href = this.website;
                 document.getElementById("time").innerText = this.time;
                 this.lit = this.litMeter;
-                document.getElementById("votes").innerText = this.lit + " Votes"
+                document.getElementById("votes").innerText = this.lit + " Votes";
             },
             increaseLitMeter() {
                 this.lit++;
                 document.getElementById("votes").innerText = this.lit + " Votes";
                 var ref = firebase.database().ref('events');
-                console.log(ref.child("0"));
+                console.log(ref.child(this.index));
                 ref.child(this.index).update({
                     litMeter: this.lit
                 });
@@ -80,12 +80,13 @@
     .image {
         width: 100%;
         height: 25vh;
-        background-image: url("../assets/flame.png");
+        margin: 0;
     }
     .namecontainer {
         width: 100%;
         color: #ffffff;
         background-color: #002d7c;
+
     }
     .iconcontainer {
         float: left;

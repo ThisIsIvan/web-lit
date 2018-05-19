@@ -1,0 +1,167 @@
+{ "events": [
+  {
+    "attendance": 60,
+    "litMeter": 50,
+    "name": "Unashamed DayParty at Lake Side",
+    "position": {
+      "lat": 47.352991,
+      "lng": 8.553809
+    },
+    "time": "SA, 26 May 2018 14:00:00 GMT",
+    "url": "https://lake-side.ch"
+  },
+  {
+    "attendance": 40,
+    "litMeter": 9,
+    "name": "summer.fm",
+    "position": {
+      "lat": 47.414411,
+      "lng": 8.549503
+    },
+    "time": "Fri, 1 Jun 2018 16:00:00 GMT",
+    "url": "http://fachverein.com/events/"
+  },
+  {
+    "attendance": 5,
+    "litMeter": 1,
+    "name": "Food & Delikatessen Festival Zürich",
+    "position": {
+      "lat": 47.390985,
+      "lng": 8.517876
+    },
+    "time": "Fri, 1 June 2018 12:00:00 GMT",
+    "url": "https://www.delikatessenfestival.ch"
+  },
+  {
+    "attendance": 34,
+    "litMeter": 20,
+    "name": "Werdinsel Openair",
+    "position": {
+      "lat": 47.400967,
+      "lng": 8.487115
+    },
+    "time": "Sa, 3 August 2018 17:00:00 GMT",
+    "url": "https://www.werdinselopenair.ch"
+  },
+  {
+    "attendance": 25,
+    "litMeter": 0,
+    "name": "Surfzürich - Surf Fair & Afterparty",
+    "position": {
+      "lat": 47.385528,
+      "lng": 8.519078
+    },
+    "time": "Sa, 9 June 2018 10:00:00 GMT",
+    "url": "https://www.surfzurich.com"
+  },
+  {
+    "attendance": 80,
+    "litMeter": 17,
+    "name": "Openair Wollishofen",
+    "position": {
+      "lat": 47.345288,
+      "lng": 8.535818
+    },
+    "time": "Sa, 16 June 2018 12:00:00 GMT",
+    "url": "https://www.openair-wollishofen.ch"
+  },
+  {
+    "attendance": 100,
+    "litMeter": 0,
+    "name": "Zürcher Limmatschwimmen",
+    "position": {
+      "lat": 47.368624,
+      "lng": 8.541801
+    },
+    "time": "Sa, 18 August 2018 12:00:00 GMT",
+    "url": "https://www.limmatschwimmen.ch"
+  },
+  {
+    "attendance": 80,
+    "litMeter": 100,
+    "name": "Streetparade",
+    "position": {
+      "lat": 47.367426,
+      "lng": 8.545278
+    },
+    "time": "Sa, 11 August 2018 13:00:00 GMT",
+    "url": "https://www.streetparade.com/de/"
+  },
+  {
+    "attendance": 66,
+    "litMeter": 45,
+    "name": "SoNaFe",
+    "position": {
+      "lat": 47.408820,
+      "lng": 8.507944
+    },
+    "time": "Do, 31 May 2018 20:00:00 GMT",
+    "url": "https://winafe-sonafe.vseth.ethz.ch"
+  },
+  {
+    "attendance": 10,
+    "litMeter": 1,
+    "name": "Bellevue Rooftop",
+    "position": {
+      "lat": 47.375837, 
+      "lng": 8.539783
+    },
+    "time": "So, 27 May 2018 14:00:00 GMT",
+    "url": "https://hiltl.ch/"
+  },
+  {
+    "attendance": 34,
+    "litMeter": 38,
+    "name": "17. Stolze Openair",
+    "position": {
+      "lat": 47.386578, 
+      "lng": 8.546793
+    },
+    "time": "Sa, 8 June 2018 17:00:00 GMT",
+    "url": "https://www.stolze-openair.ch"
+  },
+  {
+    "attendance":20,
+    "litMeter": 21,
+    "name": "Äms Fäscht",
+    "position": {
+      "lat": 47.377997, 
+      "lng": 8.523428
+    },
+    "time": "Mi, 1 August 2018 13:00:00 GMT",
+    "url": "https://www.facebook.com/events/170023993758941/"
+  },
+  {
+    "attendance": 40,
+    "litMeter": 19,
+    "name": "Street Food Festival No.8",
+    "position": {
+      "lat": 47.394270,
+      "lng": 8.505927
+    },
+    "time": "Do, 24 May 2018 17:00:00 GMT",
+    "url": "https://street-food-festival.ch"
+  },
+  {
+    "attendance": 22,
+    "litMeter": 2,
+    "name": "3. HOT DOG Festival",
+    "position": {
+      "lat": 47.353270, 
+      "lng": 8.556775
+    },
+    "time": "Di, 10 July 2018 17:00:00 GMT",
+    "url": "https://kaufleuten.ch/event/fes/"
+  },
+  {
+    "attendance": 4,
+    "litMeter": 0,
+    "name": "Late Night Comedy",
+    "position": {
+      "lat": 47.375029, 
+      "lng": 8.534674
+    },
+    "time": "Sa, 19 May 2018 22:00:00 GMT",
+    "url": "https://stand-up.ch"
+  }
+  ]}
