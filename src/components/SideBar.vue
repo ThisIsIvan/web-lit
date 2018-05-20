@@ -1,6 +1,6 @@
 <template>
-    <div id="sidebar" class="sidebar" v-show="show">
-        <img class="image" src="../assets/flame.png"/>
+    <div id="sidebar" class="sidebar" v-if="show">
+        <div class="image"/>
         <div class="namecontainer">
             <h2 id="name" style="padding: 3vh; margin: 0"></h2>
         </div>
@@ -18,7 +18,7 @@
         <div class="litcontainer">UP-VOTE THE EVENT</div>
         <div id="votes" class="litcontainer" style="margin-bottom: 8vh"></div>
 
-        <div id="ticketButton" class="ticketbtn"><i class="fas fa-ticket-alt"></i> TICKETS</div>
+        <div class="ticketbtn" onclick="window.open('https://www.starticket.ch/de')"><i class="fas fa-ticket-alt"></i> TICKETS</div>
         <div class="routebtn"><i class="fas fa-compass"></i> ROUTE</div>
     </div>
 </template>
@@ -42,7 +42,6 @@
             document.getElementById("location").innerHTML = " ";
             document.getElementById("website").innerHTML = " ";
             document.getElementById("time").innerHTML = " ";
-            this.collapsed = false;
         },
          methods: {
             setEventData() {
@@ -76,34 +75,39 @@
         height: 100%;
         width: 50vh;
         background-color: #ffffff;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     .image {
+        background-image: url("../assets/flame.png");
+        background-size: cover;
         width: 100%;
-        height: 25vh;
-        margin: 0;
+        height: 11em;
     }
     .namecontainer {
-        width: 100%;
+        max-width: 100%;
         color: #ffffff;
         background-color: #002d7c;
 
     }
     .iconcontainer {
         float: left;
-        margin-left: 2vh;
-        margin-top: 2vh;
+        margin-left: 1em;
+        margin-top: 0.8em;
         color: #002d7c;
     }
     .textcontainer {
-        margin-left: 7vh;
-        margin-top: 2vh;
+        margin-left: 3em;
+        margin-top: 0.8em;
+        max-width: 100%;
+        word-break: break-word;
     }
     .litbtn {
         display: block;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 8vh;
-        width: 15vh;
+        margin-top: 4em;
+        width: 8vw;
     }
     .litcontainer {
         width: 100%;
@@ -111,23 +115,25 @@
         color: #838383;
     }
     .ticketbtn {
-        margin-left: 2vh;
+        margin-left: 1em;
+        margin-bottom: 1em;
         float: left;
         width: 40%;
-        height: 7vh;
+        height: 3em;
         background-color: #002d7c;
         color: #ffffff;
-        line-height: 7vh;
+        line-height: 3em;
         text-align: center;
     }
     .routebtn {
-        margin-right: 2vh;
+        margin-right: 1em;
+        margin-bottom: 1em;
         float: right;
         width: 40%;
-        height: 7vh;
+        height: 3em;
         background-color: #002d7c;
         color: #ffffff;
-        line-height: 7vh;
+        line-height: 3em;
         text-align: center;
     }
 </style>
