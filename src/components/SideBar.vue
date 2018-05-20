@@ -25,15 +25,15 @@
 
 <script>
     import firebase from 'firebase'
+    import axios from 'axios'
 
     export default {
         name: "SideBar",
         data() {
             return {
-                lit: 0
             }
         },
-        props: ["name", "location", "website", "time", "litMeter", "show", "index"],
+        props: ["marker", "show"], //["name", "location", "website", "time", "litMeter", "show", "index"]
         updated: function() {
           this.setEventData();
         },
@@ -45,22 +45,51 @@
         },
          methods: {
             setEventData() {
-                document.getElementById("name").innerText = this.name;
-                document.getElementById("location").innerText = this.location;
-                document.getElementById("website").innerText = this.website;
-                document.getElementById("website").href = this.website;
-                document.getElementById("time").innerText = this.time;
-                this.lit = this.litMeter;
-                document.getElementById("votes").innerText = this.lit + " Votes";
+                document.getElementById("name").innerText = this.marker.name;
+
+                const coordinates = this.marker.position;
+                var location = axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
+                     .then(response => {
+                         console.log(response.data);
+                         location = response.data.results[0].formatted_address;
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    });
+                document.getElementById("location").innerText = location;
+                document.getElementById("website").innerText = this.marker.url;
+                document.getElementById("website").href = this.marker.url;
+
+                const time = new Date(this.marker.time);
+                let minutes = time.getMinutes();
+                minutes = minutes< 10 ? '0'+minutes : minutes;
+                document.getElementById("time").innerText = time.getHours()+":"+minutes;
+                document.getElementById("votes").innerText = this.marker.litMeter + " Votes";
+
+                // document.getElementById("name").innerText = this.name;
+                // document.getElementById("location").innerText = this.location;
+                // document.getElementById("website").innerText = this.website;
+                // document.getElementById("website").href = this.website;
+                // document.getElementById("time").innerText = this.time;
+                // this.lit = this.litMeter;
+                // document.getElementById("votes").innerText = this.lit + " Votes";
             },
             increaseLitMeter() {
-                this.lit++;
-                document.getElementById("votes").innerText = this.lit + " Votes";
+                this.marker.litMeter++;
+                document.getElementById("votes").innerText = this.marker.litMeter + " Votes";
                 var ref = firebase.database().ref('events');
-                console.log(ref.child(this.index));
-                ref.child(this.index).update({
-                    litMeter: this.lit
+                console.log(ref.child(this.marker));
+                ref.child(this.marker).update({
+                    litMeter: this.marker.litMeter
                 });
+
+                // this.lit++;
+                // document.getElementById("votes").innerText = this.lit + " Votes";
+                // var ref = firebase.database().ref('events');
+                // console.log(ref.child(this.index));
+                // ref.child(this.index).update({
+                //     litMeter: this.lit
+                // });
             },
 
         }
