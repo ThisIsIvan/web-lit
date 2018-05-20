@@ -1,22 +1,22 @@
 <template>
     <div id="sidebar" class="sidebar" v-if="show">
-        <div class="image"/>
+        <div class="image"></div>
         <div class="namecontainer">
-            <h2 id="name" style="padding: 3vh; margin: 0"></h2>
+            <h2 id="name" style="padding: 3vh; margin: 0">{{marker.name}}</h2>
         </div>
 
         <div class="iconcontainer"><i class="fas fa-map-marker-alt"></i></div>
-        <div id="location" class="textcontainer"></div>
+        <div id="location" class="textcontainer">{{eventLocation}}</div>
 
         <div class="iconcontainer"><i class="fas fa-globe"></i></div>
-        <div class="textcontainer"><a id="website" href=""></a></div>
+        <div class="textcontainer"><a id="website" href="">{{marker.url}}</a></div>
 
         <div class="iconcontainer"><i class="fas fa-clock"></i></div>
-        <div id="time" class="textcontainer"></div>
+        <div id="time" class="textcontainer">{{marker.time}}</div>
 
         <img class="litbtn" src="../assets/lit_button.png" v-on:click="increaseLitMeter"/>
         <div class="litcontainer">UP-VOTE THE EVENT</div>
-        <div id="votes" class="litcontainer" style="margin-bottom: 8vh"></div>
+        <div id="votes" class="litcontainer" style="margin-bottom: 8vh">{{marker.litMeter}}</div>
 
         <div class="ticketbtn" onclick="window.open('https://www.starticket.ch/de')"><i class="fas fa-ticket-alt"></i> TICKETS</div>
         <div class="routebtn"><i class="fas fa-compass"></i> ROUTE</div>
@@ -25,7 +25,7 @@
 
 <script>
     import firebase from 'firebase'
-    import axios from 'axios'
+    //import axios from 'axios'
 
     export default {
         name: "SideBar",
@@ -33,47 +33,14 @@
             return {
             }
         },
-        props: ["marker", "show"], //["name", "location", "website", "time", "litMeter", "show", "index"]
-        updated: function() {
-          this.setEventData();
-        },
-        destroyed: function() {
+        props: ["marker","eventLocation", "show"],
+        /*destroyed: function() {
             document.getElementById("name").innerText = " ";
             document.getElementById("location").innerHTML = " ";
             document.getElementById("website").innerHTML = " ";
             document.getElementById("time").innerHTML = " ";
-        },
+        },*/
          methods: {
-            setEventData() {
-                document.getElementById("name").innerText = this.marker.name;
-
-                const coordinates = this.marker.position;
-                var location = axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
-                     .then(response => {
-                         console.log(response.data);
-                         location = response.data.results[0].formatted_address;
-                    })
-                    .catch(e => {
-                        console.log(e)
-                    });
-                document.getElementById("location").innerText = location;
-                document.getElementById("website").innerText = this.marker.url;
-                document.getElementById("website").href = this.marker.url;
-
-                const time = new Date(this.marker.time);
-                let minutes = time.getMinutes();
-                minutes = minutes< 10 ? '0'+minutes : minutes;
-                document.getElementById("time").innerText = time.getHours()+":"+minutes;
-                document.getElementById("votes").innerText = this.marker.litMeter + " Votes";
-
-                // document.getElementById("name").innerText = this.name;
-                // document.getElementById("location").innerText = this.location;
-                // document.getElementById("website").innerText = this.website;
-                // document.getElementById("website").href = this.website;
-                // document.getElementById("time").innerText = this.time;
-                // this.lit = this.litMeter;
-                // document.getElementById("votes").innerText = this.lit + " Votes";
-            },
             increaseLitMeter() {
                 this.marker.litMeter++;
                 document.getElementById("votes").innerText = this.marker.litMeter + " Votes";

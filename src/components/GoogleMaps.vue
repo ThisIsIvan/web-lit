@@ -14,7 +14,8 @@
                         v-on:click="setEventData(index)"></GmapMarker>
         </GmapMap>
         <side-bar v-bind:marker="eventMarker"
-                  :show="showSidebar"></side-bar><!--:name="eventName" :location="eventLocation" :website="eventWebsite" :time="eventTime" :litMeter="eventLitMeter" :index="eventindex"-->
+                  v-bind:eventLocation="eventLocation"
+                  :show="showSidebar"></side-bar>
         <logo></logo>
     </div>
 </template>
@@ -29,7 +30,7 @@
     import PinBlue from "../assets/pin_big_blue.png"
     import PinRed from "../assets/pin_big_red.png"
     import firebase from 'firebase'
-    //import axios from 'axios'
+    import axios from 'axios'
 
     export default {
         name: 'GoogleMaps',
@@ -54,13 +55,10 @@
                     zoomControl: false
                 },
                 eventMarkers: [],
-                eventMarker: [],
-                // eventName: " ",
-                // eventLocation: " ",
-                // eventWebsite: " ",
-                // eventTime: " ",
-                // eventLitMeter: 0,
-                // eventindex: 0,
+                eventMarker: {
+                    valid: false
+                },
+                eventLocation: " ",
                 showSidebar: false
             }
         },
@@ -87,17 +85,6 @@
                     }
                 });
             },
-            // reverseGeocoding(coordinates) {
-            //     console.log(coordinates);
-            //     axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
-            //         .then(response => {
-            //             console.log(response.data);
-            //             this.eventLocation = response.data.results[0].formatted_address;
-            //         })
-            //         .catch(e => {
-            //             console.log(e)
-            //         })
-            // },
             getMarkers() {
                 const ref = firebase.database().ref('events');
                 const eventMarkers = [];
@@ -141,25 +128,21 @@
             },
             setEventData(index) {
                 this.eventMarker = this.eventMarkers[index];
+                const coordinates = this.eventMarker.position;
+                this.eventLocation = axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
+                    .then(response => {
+                        console.log(response.data);
+                        this.eventLocation = response.data.results[0].formatted_address;
+                        this.showSidebar = true;
+                    })
+                    .catch(e => {
+                        console.log(e)
+                    });
+                const time = new Date(this.eventMarkers[index].time);
+                let minutes = time.getMinutes();
+                minutes = minutes< 10 ? '0'+minutes : minutes;
+                this.eventMarker.time = time.getHours()+":"+minutes;
                 this.showSidebar = true;
-                // this.eventName = this.eventMarkers[index].name;
-                // const coordinates = this.eventMarkers[index].position;
-                // this.eventLocation = axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
-                //     .then(response => {
-                //         console.log(response.data);
-                //         this.eventLocation = response.data.results[0].formatted_address;
-                //         this.showSidebar = true;
-                //     })
-                //     .catch(e => {
-                //         console.log(e)
-                //     });
-                // this.eventWebsite = this.eventMarkers[index].url;
-                // const time = new Date(this.eventMarkers[index].time);
-                // let minutes = time.getMinutes();
-                // minutes = minutes< 10 ? '0'+minutes : minutes;
-                // this.eventTime = time.getHours()+":"+minutes;
-                // this.eventLitMeter = this.eventMarkers[index].litMeter;
-                // this.eventindex = index;
             },
             closeSideBar() {
                 this.showSidebar = false;
