@@ -1,5 +1,6 @@
 { "events": [
   {
+    "id":0,
     "attendance": 60,
     "litMeter": 50,
     "name": "Unashamed DayParty at Lake Side",
@@ -11,6 +12,7 @@
     "url": "https://lake-side.ch"
   },
   {
+    "id":1,
     "attendance": 40,
     "litMeter": 9,
     "name": "summer.fm",
@@ -22,6 +24,7 @@
     "url": "http://fachverein.com/events/"
   },
   {
+    "id":2,
     "attendance": 5,
     "litMeter": 1,
     "name": "Food & Delikatessen Festival Zürich",
@@ -33,6 +36,7 @@
     "url": "https://www.delikatessenfestival.ch"
   },
   {
+    "id":3,
     "attendance": 34,
     "litMeter": 20,
     "name": "Werdinsel Openair",
@@ -44,6 +48,7 @@
     "url": "https://www.werdinselopenair.ch"
   },
   {
+    "id":4,
     "attendance": 25,
     "litMeter": 0,
     "name": "Surfzürich - Surf Fair & Afterparty",
@@ -55,6 +60,7 @@
     "url": "https://www.surfzurich.com"
   },
   {
+    "id":5,
     "attendance": 80,
     "litMeter": 17,
     "name": "Openair Wollishofen",
@@ -66,6 +72,7 @@
     "url": "https://www.openair-wollishofen.ch"
   },
   {
+    "id":6,
     "attendance": 100,
     "litMeter": 0,
     "name": "Zürcher Limmatschwimmen",
@@ -77,6 +84,7 @@
     "url": "https://www.limmatschwimmen.ch"
   },
   {
+    "id":7,
     "attendance": 80,
     "litMeter": 100,
     "name": "Streetparade",
@@ -88,6 +96,7 @@
     "url": "https://www.streetparade.com/de/"
   },
   {
+    "id":8,
     "attendance": 66,
     "litMeter": 45,
     "name": "SoNaFe",
@@ -99,39 +108,43 @@
     "url": "https://winafe-sonafe.vseth.ethz.ch"
   },
   {
+    "id":9,
     "attendance": 10,
     "litMeter": 1,
     "name": "Bellevue Rooftop",
     "position": {
-      "lat": 47.375837, 
+      "lat": 47.375837,
       "lng": 8.539783
     },
     "time": "So, 27 May 2018 14:00:00 GMT",
     "url": "https://hiltl.ch/"
   },
   {
+    "id":10,
     "attendance": 34,
     "litMeter": 38,
     "name": "17. Stolze Openair",
     "position": {
-      "lat": 47.386578, 
+      "lat": 47.386578,
       "lng": 8.546793
     },
     "time": "Sa, 8 June 2018 17:00:00 GMT",
     "url": "https://www.stolze-openair.ch"
   },
   {
+    "id":11,
     "attendance":20,
     "litMeter": 21,
     "name": "Äms Fäscht",
     "position": {
-      "lat": 47.377997, 
+      "lat": 47.377997,
       "lng": 8.523428
     },
     "time": "Mi, 1 August 2018 13:00:00 GMT",
     "url": "https://www.facebook.com/events/170023993758941/"
   },
   {
+    "id":12,
     "attendance": 40,
     "litMeter": 19,
     "name": "Street Food Festival No.8",
@@ -143,6 +156,7 @@
     "url": "https://street-food-festival.ch"
   },
   {
+    "id":13,
     "attendance": 22,
     "litMeter": 2,
     "name": "3. HOT DOG Festival",
@@ -154,6 +168,7 @@
     "url": "https://kaufleuten.ch/event/fes/"
   },
   {
+    "id":13,
     "attendance": 4,
     "litMeter": 0,
     "name": "Late Night Comedy",

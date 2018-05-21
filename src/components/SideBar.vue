@@ -43,10 +43,10 @@
          methods: {
             increaseLitMeter() {
                 this.marker.litMeter++;
-                document.getElementById("votes").innerText = this.marker.litMeter + " Votes";
-                var ref = firebase.database().ref('events');
-                console.log(ref.child(this.marker));
-                ref.child(this.marker).update({
+                //document.getElementById("votes").innerText = this.marker.litMeter + " Votes";
+                var ref = firebase.database().ref('events/'+this.marker.id);
+                //console.log(ref);
+                ref.update({
                     litMeter: this.marker.litMeter
                 });
 

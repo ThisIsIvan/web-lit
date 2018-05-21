@@ -3,6 +3,7 @@ import App from './App.vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import VueGeolocation from 'vue-browser-geolocation';
 import firebase from 'firebase'
+import GmapCluster from 'vue2-google-maps/dist/components/cluster'
 
 Vue.config.productionTip = false
 
@@ -13,6 +14,8 @@ Vue.use(VueGoogleMaps, {
         libraries: 'places'
     }
 });
+
+Vue.component('GmapCluster', GmapCluster);
 
 Vue.use(VueGeolocation);
 
