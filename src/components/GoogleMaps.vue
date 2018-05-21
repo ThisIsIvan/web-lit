@@ -7,11 +7,15 @@
                  class="map">
             <GmapMarker :position="locationMarkerPosition"
                         :clickable="false"></GmapMarker>
-            <GmapMarker :key="index" v-for="(m,index) in eventMarkers"
-                        :position="m.position"
-                        :litMeter="m.litMeter"
-                        :icon="getIcon(m.attendance, m.litMeter)"
-                        v-on:click="setEventData(index)"></GmapMarker>
+
+            <GmapCluster :minimumClusterSize="3"
+                         :zoomOnClick="true">
+                <GmapMarker :key="index" v-for="(m,index) in eventMarkers"
+                            :position="m.position"
+                            :litMeter="m.litMeter"
+                            :icon="getIcon(m.attendance, m.litMeter)"
+                            v-on:click="setEventData(index)"></GmapMarker>
+            </GmapCluster>
         </GmapMap>
         <side-bar v-bind:marker="eventMarker"
                   v-bind:eventLocation="eventLocation"
@@ -69,7 +73,7 @@
         },
         methods: {
             locationChanged(location) {
-                console.log('event', location);
+                //console.log('event', location);
                 this.currentLocation = location;
                 this.locationMarkerPosition = location;
             },
@@ -88,8 +92,8 @@
             getMarkers() {
                 const ref = firebase.database().ref('events');
                 const eventMarkers = [];
-                ref.on("child_added", function (snapshot) {
-                    console.log(snapshot.val());
+                ref.orderByChild("litMeter").on("child_added", function (snapshot) {
+                    console.log(snapshot.val().litMeter);
                     eventMarkers.push(snapshot.val());
                 });
                 this.eventMarkers = eventMarkers;
@@ -103,7 +107,7 @@
                 //var markers = this.eventMarkers;
                 ref.on("child_changed", function (snapshot) {
                     changedMarker = snapshot.val();
-                    console.log(snapshot.val());
+                    //console.log(snapshot.val());
                     const name = changedMarker.name;
                     const index = reef.eventMarkers.findIndex(x => x.name === name);
                     reef.eventMarkers[index] = changedMarker;
@@ -111,7 +115,7 @@
                 });
             },
             getIcon(attendance, litMeter) {
-                console.log("attendance: " + attendance + " litMeter:" + litMeter);
+                //console.log("attendance: " + attendance + " litMeter:" + litMeter);
                 if (litMeter <= 20) {
                     if (attendance <= 10) {
                         return PinSmall
@@ -131,7 +135,7 @@
                 const coordinates = this.eventMarker.position;
                 this.eventLocation = axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
                     .then(response => {
-                        console.log(response.data);
+                        //console.log(response.data);
                         this.eventLocation = response.data.results[0].formatted_address;
                         this.showSidebar = true;
                     })
@@ -140,8 +144,8 @@
                     });
                 const time = new Date(this.eventMarkers[index].time);
                 let minutes = time.getMinutes();
-                minutes = minutes< 10 ? '0'+minutes : minutes;
-                this.eventMarker.time = time.getHours()+":"+minutes;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                this.eventMarker.time = time.getHours() + ":" + minutes;
                 this.showSidebar = true;
             },
             closeSideBar() {
