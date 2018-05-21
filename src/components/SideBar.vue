@@ -16,7 +16,7 @@
 
         <img class="litbtn" src="../assets/lit_button.png" v-on:click="increaseLitMeter"/>
         <div class="litcontainer">UP-VOTE THE EVENT</div>
-        <div id="votes" class="litcontainer" style="margin-bottom: 8vh">{{marker.litMeter}}</div>
+        <div id="votes" class="litcontainer" style="margin-bottom: 5em">{{marker.litMeter}}</div>
 
         <div class="ticketbtn" onclick="window.open('https://www.starticket.ch/de')"><i class="fas fa-ticket-alt"></i> TICKETS</div>
         <div class="routebtn"><i class="fas fa-compass"></i> ROUTE</div>
