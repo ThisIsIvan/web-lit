@@ -6,7 +6,7 @@
         </div>
 
         <div class="iconcontainer"><i class="fas fa-map-marker-alt"></i></div>
-        <div id="location" class="textcontainer">{{eventLocation}}</div>
+        <div id="location" class="textcontainer">{{marker.eventLocation}}</div>
 
         <div class="iconcontainer"><i class="fas fa-globe"></i></div>
         <div class="textcontainer"><a id="website" href="">{{marker.url}}</a></div>
@@ -33,7 +33,7 @@
             return {
             }
         },
-        props: ["marker","eventLocation", "show"],
+        props: ["marker", "show"],
          methods: {
             increaseLitMeter() {
                 this.marker.litMeter++;

@@ -18,7 +18,6 @@
             </GmapCluster>
         </GmapMap>
         <side-bar v-bind:marker="eventMarker"
-                  v-bind:eventLocation="eventLocation"
                   :show="showSidebar"></side-bar>
         <logo></logo>
     </div>
@@ -62,7 +61,6 @@
                 eventMarker: {
                     valid: false
                 },
-                eventLocation: " ",
                 showSidebar: false
             }
         },
@@ -94,7 +92,19 @@
                 const eventMarkers = [];
                 ref.orderByChild("litMeter").on("child_added", function (snapshot) {
                     console.log(snapshot.val().litMeter);
-                    eventMarkers.push(snapshot.val());
+                    let marker = snapshot.val();
+                    axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.position.lat + ',' + marker.position.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
+                        .then(response => {
+                            marker.eventLocation = response.data.results[0].formatted_address;
+                            const time = new Date(marker.time);
+                            let minutes = time.getMinutes();
+                            minutes = minutes < 10 ? '0' + minutes : minutes;
+                            marker.time = time.getHours() + ":" + minutes;
+                            eventMarkers.push(marker);
+                        })
+                        .catch(e => {
+                            console.log(e)
+                        });
                 });
                 this.eventMarkers = eventMarkers;
                 this.$forceUpdate();
@@ -132,20 +142,6 @@
             },
             setEventData(index) {
                 this.eventMarker = this.eventMarkers[index];
-                const coordinates = this.eventMarker.position;
-                this.eventLocation = axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + coordinates.lat + ',' + coordinates.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
-                    .then(response => {
-                        //console.log(response.data);
-                        this.eventLocation = response.data.results[0].formatted_address;
-                        this.showSidebar = true;
-                    })
-                    .catch(e => {
-                        console.log(e)
-                    });
-                const time = new Date(this.eventMarkers[index].time);
-                let minutes = time.getMinutes();
-                minutes = minutes < 10 ? '0' + minutes : minutes;
-                this.eventMarker.time = time.getHours() + ":" + minutes;
                 this.showSidebar = true;
             },
             closeSideBar() {
