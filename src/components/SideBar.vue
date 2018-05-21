@@ -16,7 +16,7 @@
 
         <img class="litbtn" src="../assets/lit_button.png" v-on:click="increaseLitMeter"/>
         <div class="litcontainer">UP-VOTE THE EVENT</div>
-        <div id="votes" class="litcontainer" style="margin-bottom: 5em">{{marker.litMeter}}</div>
+        <div id="votes" class="litcontainer" style="margin-bottom: 5em">{{marker.litMeter}} Votes</div>
 
         <div class="ticketbtn" onclick="window.open('https://www.starticket.ch/de')"><i class="fas fa-ticket-alt"></i> TICKETS</div>
         <div class="routebtn"><i class="fas fa-compass"></i> ROUTE</div>
@@ -34,12 +34,6 @@
             }
         },
         props: ["marker","eventLocation", "show"],
-        /*destroyed: function() {
-            document.getElementById("name").innerText = " ";
-            document.getElementById("location").innerHTML = " ";
-            document.getElementById("website").innerHTML = " ";
-            document.getElementById("time").innerHTML = " ";
-        },*/
          methods: {
             increaseLitMeter() {
                 this.marker.litMeter++;
@@ -49,14 +43,6 @@
                 ref.update({
                     litMeter: this.marker.litMeter
                 });
-
-                // this.lit++;
-                // document.getElementById("votes").innerText = this.lit + " Votes";
-                // var ref = firebase.database().ref('events');
-                // console.log(ref.child(this.index));
-                // ref.child(this.index).update({
-                //     litMeter: this.lit
-                // });
             },
 
         }
