@@ -1,9 +1,11 @@
 <template>
     <div class="container">
         <div class="speech" v-if="show">
-            <img src="../assets/pin_short.png"/> 0 - 9 Going <br/>
-            <img src="../assets/pin_middle.png"/> 10 - 19 Going <br/>
-            <img src="../assets/pin_big.png"/> >20 Going
+            <img src="../assets/pin_short.png"/> 0 - 9 Going
+            <img src="../assets/pin_middle.png" style="margin-left: 1em"/>10 - 19 Going
+            <img src="../assets/pin_big.png" style="margin-left: 1em"/> > 20 Going <br/>
+            <img src="../assets/pin_big_blue.png" style="margin-top: 1em"/> 20 - 39 Lit
+            <img src="../assets/pin_big_red.png" style="margin-left: 1em"/> > 40 Lit
         </div>
         <img class="logo" src="../assets/icon_red.png" v-on:click="openContainer"/>
     </div>
@@ -34,7 +36,6 @@
     }
     .logo{
         background-color: #ffffff;
-        /*background-color: #002d7c;*/
         padding: 1em;
         border-radius: 50%;
         width: 7em;
@@ -43,12 +44,9 @@
     }
     .speech {
         position: relative;
-        /*background: #002d7c;*/
         background: #ffffff;
         border-radius: .4em;
         float: left;
-        width: 25em;
-        height: 10em;
         margin: 0.5em;
         margin-right: 2em;
         padding: 1em;
@@ -61,7 +59,6 @@
         width: 0;
         height: 0;
         border: 2em solid transparent;
-        /*border-left-color: #002d7c;*/
         border-left-color: #ffffff;
         border-right: 0;
         margin-top: -2em;

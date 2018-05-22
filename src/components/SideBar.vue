@@ -14,7 +14,7 @@
         <div class="iconcontainer"><i class="fas fa-clock"></i></div>
         <div id="time" class="textcontainer">{{marker.time}}</div>
 
-        <img class="litbtn" src="../assets/lit_button.png" v-on:click="increaseLitMeter"/>
+        <button class="litbtn" :disabled=this.disable v-on:click="increaseLitMeter"><img src="../assets/lit_button.png" style="width: 8vw"/></button>
         <div class="litcontainer">UP-VOTE THE EVENT</div>
         <div id="votes" class="litcontainer" style="margin-bottom: 5em">{{marker.litMeter}} Votes</div>
 
@@ -31,10 +31,11 @@
         name: "SideBar",
         data() {
             return {
+                disable: false
             }
         },
         props: ["marker", "show"],
-         methods: {
+        methods: {
             increaseLitMeter() {
                 this.marker.litMeter++;
                 //document.getElementById("votes").innerText = this.marker.litMeter + " Votes";
@@ -43,8 +44,8 @@
                 ref.update({
                     litMeter: this.marker.litMeter
                 });
+                this.disable = true;
             },
-
         }
     }
 </script>
@@ -89,7 +90,8 @@
         margin-left: auto;
         margin-right: auto;
         margin-top: 4em;
-        width: 8vw;
+        border: Transparent;
+        background: Transparent;
     }
     .litcontainer {
         width: 100%;
