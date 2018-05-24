@@ -9,7 +9,8 @@
       "lng": 8.553809
     },
     "time": "SA, 26 May 2018 14:00:00 GMT",
-    "url": "https://lake-side.ch"
+    "url": "https://lake-side.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/33306771_10156175935736469_8893914325463334912_o.jpg?_nc_cat=0&oh=d761ba917bc9b86cf9a357ddcdb9ba58&oe=5B787E94"
   },
   {
     "id":1,
@@ -21,7 +22,8 @@
       "lng": 8.549503
     },
     "time": "Fri, 1 Jun 2018 16:00:00 GMT",
-    "url": "http://fachverein.com/events/"
+    "url": "http://fachverein.com/events/",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/32257250_10156434919893223_6832531023557820416_o.jpg?_nc_cat=0&oh=c7329b548b32278dd471e69bc3c5360e&oe=5B94FE86"
   },
   {
     "id":2,
@@ -33,7 +35,8 @@
       "lng": 8.517876
     },
     "time": "Fri, 1 June 2018 12:00:00 GMT",
-    "url": "https://www.delikatessenfestival.ch"
+    "url": "https://www.delikatessenfestival.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t31.0-8/19466538_1936558329959077_4006658560513302116_o.jpg?_nc_cat=0&oh=46296716084f227461b82d9e5eff04be&oe=5B77DB69"
   },
   {
     "id":3,
@@ -45,7 +48,8 @@
       "lng": 8.487115
     },
     "time": "Sa, 3 August 2018 17:00:00 GMT",
-    "url": "https://www.werdinselopenair.ch"
+    "url": "https://www.werdinselopenair.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t31.0-8/29064498_10155901608100412_5563996857736684976_o.jpg?_nc_cat=0&oh=d7bc22d9113e626d7476449c48793d09&oe=5B8EAA84"
   },
   {
     "id":4,
@@ -57,7 +61,8 @@
       "lng": 8.519078
     },
     "time": "Sa, 9 June 2018 10:00:00 GMT",
-    "url": "https://www.surfzurich.com"
+    "url": "https://www.surfzurich.com",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/32807517_983292335170029_9096095126328967168_o.jpg?_nc_cat=0&oh=18a9369bcfd954bd66c431370af5f7cf&oe=5BBDFB6A"
   },
   {
     "id":5,
@@ -69,7 +74,8 @@
       "lng": 8.535818
     },
     "time": "Sa, 16 June 2018 12:00:00 GMT",
-    "url": "https://www.openair-wollishofen.ch"
+    "url": "https://www.openair-wollishofen.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/32247370_1878836242169033_2061439952524148736_o.jpg?_nc_cat=0&oh=5c75d8eb6c2d6f06ec3b48a7b8cb76cd&oe=5BC40DF3"
   },
   {
     "id":6,
@@ -81,7 +87,8 @@
       "lng": 8.541801
     },
     "time": "Sa, 18 August 2018 12:00:00 GMT",
-    "url": "https://www.limmatschwimmen.ch"
+    "url": "https://www.limmatschwimmen.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/20953276_1631884173530344_1672766606639288175_n.jpg?_nc_cat=0&oh=d014ce3dc143de15abe31e481c235ce0&oe=5B7BEE9C"
   },
   {
     "id":7,
@@ -93,7 +100,8 @@
       "lng": 8.545278
     },
     "time": "Sa, 11 August 2018 13:00:00 GMT",
-    "url": "https://www.streetparade.com/de/"
+    "url": "https://www.streetparade.com/de/",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t31.0-8/27798175_10155817936996690_8215588243983165275_o.png?_nc_cat=0&oh=1d5383978f49a4eab56ddc7ab11180fd&oe=5B930849"
   },
   {
     "id":8,
@@ -105,7 +113,8 @@
       "lng": 8.507944
     },
     "time": "Do, 31 May 2018 20:00:00 GMT",
-    "url": "https://winafe-sonafe.vseth.ethz.ch"
+    "url": "https://winafe-sonafe.vseth.ethz.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/32792458_1553533501425058_1110993441157808128_o.jpg?_nc_cat=0&oh=39edc15a6e1f7b6ea4cf3ab98776a586&oe=5B850231"
   },
   {
     "id":9,
@@ -117,7 +126,8 @@
       "lng": 8.539783
     },
     "time": "So, 27 May 2018 14:00:00 GMT",
-    "url": "https://hiltl.ch/"
+    "url": "https://hiltl.ch/",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/32891522_1367605366716809_3089189424177610752_o.jpg?_nc_cat=0&oh=284ea745837cba3c5808aa2d8dea56c8&oe=5B7FD680"
   },
   {
     "id":10,
@@ -129,7 +139,8 @@
       "lng": 8.546793
     },
     "time": "Sa, 8 June 2018 17:00:00 GMT",
-    "url": "https://www.stolze-openair.ch"
+    "url": "https://www.stolze-openair.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/32191695_1637632439687514_1143052996905533440_o.jpg?_nc_cat=0&oh=43aa193f93cd490a8325bc259ce371c7&oe=5B7D45F6"
   },
   {
     "id":11,
@@ -141,7 +152,8 @@
       "lng": 8.523428
     },
     "time": "Mi, 1 August 2018 13:00:00 GMT",
-    "url": "https://www.facebook.com/events/170023993758941/"
+    "url": "https://www.facebook.com/events/170023993758941/",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/21433004_824670077703931_6929079070115676149_n.jpg?_nc_cat=0&oh=d40173562d55b4a69e78c1033545e642&oe=5B7922ED"
   },
   {
     "id":12,
@@ -153,7 +165,8 @@
       "lng": 8.505927
     },
     "time": "Do, 24 May 2018 17:00:00 GMT",
-    "url": "https://street-food-festival.ch"
+    "url": "https://street-food-festival.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t31.0-8/28947495_849931955189312_7991043851374551254_o.jpg?_nc_cat=0&oh=1c2e45741243488e55c88322466c2379&oe=5B8C0D1B"
   },
   {
     "id":13,
@@ -165,7 +178,8 @@
       "lng": 8.556775
     },
     "time": "Di, 10 July 2018 17:00:00 GMT",
-    "url": "https://kaufleuten.ch/event/fes/"
+    "url": "https://kaufleuten.ch/event/fes/",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/26993405_573642686315639_470858623177442424_n.jpg?_nc_cat=0&oh=214d7726d4e11a4d243c2ef7cecc41e6&oe=5B921D28"
   },
   {
     "id":13,
@@ -177,6 +191,7 @@
       "lng": 8.534674
     },
     "time": "Sa, 19 May 2018 22:00:00 GMT",
-    "url": "https://stand-up.ch"
+    "url": "https://stand-up.ch",
+    "image": "https://scontent-frt3-2.xx.fbcdn.net/v/t31.0-8/18955021_1298629943586801_7497302223378362820_o.jpg?_nc_cat=0&oh=2388dfb7206812ddf3c0b751a8b64bdd&oe=5B795583"
   }
   ]}

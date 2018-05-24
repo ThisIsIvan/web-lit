@@ -1,6 +1,8 @@
 <template>
     <div id="sidebar" class="sidebar" v-if="show">
-        <div class="image"></div>
+        <div class="image">
+            <img class="image" :src="marker.image" style="height: 100%"/>
+        </div>
         <div class="namecontainer">
             <h2 id="name" style="padding: 3vh; margin: 0">{{marker.name}}</h2>
         </div>
@@ -138,8 +140,6 @@
     }
 
     .image {
-        background-image: url("../assets/flame.png");
-        background-size: cover;
         width: 100%;
         height: 11em;
     }

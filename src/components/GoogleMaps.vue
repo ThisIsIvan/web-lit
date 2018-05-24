@@ -31,8 +31,12 @@
     import PinSmall from "../assets/pin_short.png"
     import PinMiddle from "../assets/pin_middle.png"
     import PinBig from "../assets/pin_big.png"
-    import PinBlue from "../assets/pin_big_blue.png"
-    import PinRed from "../assets/pin_big_red.png"
+    import PinSmallBlue from "../assets/pin_small_blue.png"
+    import PinMiddleBlue from "../assets/pin_middle_blue.png"
+    import PinBigBlue from "../assets/pin_big_blue.png"
+    import PinSmallRed from "../assets/pin_small_red.png"
+    import PinMiddleRed from "../assets/pin_middle_red.png"
+    import PinBigRed from "../assets/pin_big_red.png"
     import firebase from 'firebase'
     import axios from 'axios'
 
@@ -135,9 +139,21 @@
                         return PinBig
                     }
                 } else if (litMeter <= 40) {
-                    return PinBlue
+                    if (attendance <= 10) {
+                        return PinSmallBlue
+                    } else if (attendance <= 20) {
+                        return PinMiddleBlue
+                    } else {
+                        return PinBigBlue
+                    }
                 } else {
-                    return PinRed
+                    if (attendance <= 10) {
+                        return PinSmallRed
+                    } else if (attendance <= 20) {
+                        return PinMiddleRed
+                    } else {
+                        return PinBigRed
+                    }
                 }
             },
             setEventData(index) {
