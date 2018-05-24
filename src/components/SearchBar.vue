@@ -17,12 +17,10 @@
         },
         methods: {
             searchLocation() {
-                // eslint-disable-next-line no-undef
+                // eslint-canVote-next-line no-undef
                 const geocoder = new google.maps.Geocoder();
                 geocoder.geocode({'address': this.searchAddressInput}, (results, status) => {
                     if (status === 'OK') {
-                        //this.currentLocation.lat = results[0].geometry.location.lat();
-                        //this.currentLocation.lng = results[0].geometry.location.lng();
                         const lat = results[0].geometry.location.lat();
                         const lng = results[0].geometry.location.lng();
                         console.log(lat, lng);

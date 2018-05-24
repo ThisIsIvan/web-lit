@@ -18,7 +18,8 @@
             </GmapCluster>
         </GmapMap>
         <side-bar v-bind:marker="eventMarker"
-                  :show="showSidebar"></side-bar>
+                  :show="showSidebar"
+                  :current-location="currentLocation"></side-bar>
         <logo></logo>
     </div>
 </template>
@@ -71,7 +72,6 @@
         },
         methods: {
             locationChanged(location) {
-                //console.log('event', location);
                 this.currentLocation = location;
                 this.locationMarkerPosition = location;
             },
