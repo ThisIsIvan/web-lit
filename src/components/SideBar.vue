@@ -36,7 +36,7 @@
     import GoogleMaps from "./GoogleMaps";
     import {has as _has} from 'lodash';
 
-    const MAX_DISTANCE = 100;
+    const MAX_DISTANCE = 1000;
     const ERROR_VOTED = 'You can only vote once!';
     const ERROR_DISTANCE = 'You must be within ' + MAX_DISTANCE + 'm of the event!';
     const ERROR_BOTH = ERROR_VOTED + '\n' + ERROR_DISTANCE;

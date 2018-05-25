@@ -1,11 +1,7 @@
 <template>
     <div class="container">
         <div class="speech" v-if="show">
-            <img src="../assets/pin_short.png"/> 0 - 9 Going
-            <img src="../assets/pin_middle.png" style="margin-left: 1em"/>10 - 19 Going
-            <img src="../assets/pin_big.png" style="margin-left: 1em"/> > 20 Going <br/>
-            <img src="../assets/pin_big_blue.png" style="margin-top: 1em"/> 20 - 39 Lit
-            <img src="../assets/pin_big_red.png" style="margin-left: 1em"/> > 40 Lit
+            <img src="../assets/legend.png"/>
         </div>
         <img class="logo" src="../assets/icon_red.png" v-on:click="openContainer"/>
     </div>
