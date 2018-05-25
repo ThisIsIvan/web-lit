@@ -94,8 +94,9 @@
             getMarkers() {
                 const ref = firebase.database().ref('events');
                 const eventMarkers = [];
+                const self = this;
                 ref.orderByChild("litMeter").on("child_added", function (snapshot) {
-                    console.log(snapshot.val().litMeter);
+
                     let marker = snapshot.val();
                     axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.position.lat + ',' + marker.position.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
                         .then(response => {
@@ -105,14 +106,13 @@
                             minutes = minutes < 10 ? '0' + minutes : minutes;
                             marker.time = time.getHours() + ":" + minutes;
                             eventMarkers.push(marker);
+                            self.eventMarkers = eventMarkers;
+                            self.$forceUpdate();
                         })
                         .catch(e => {
                             console.log(e)
                         });
                 });
-                this.eventMarkers = eventMarkers;
-                this.$forceUpdate();
-
             },
             changeMarker() {
                 const ref = firebase.database().ref('events');
@@ -121,11 +121,23 @@
                 //var markers = this.eventMarkers;
                 ref.on("child_changed", function (snapshot) {
                     changedMarker = snapshot.val();
-                    //console.log(snapshot.val());
+
                     const name = changedMarker.name;
                     const index = reef.eventMarkers.findIndex(x => x.name === name);
-                    reef.eventMarkers[index] = changedMarker;
-                    reef.$forceUpdate();
+
+                    axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + changedMarker.position.lat + ',' + changedMarker.position.lng + '&key=AIzaSyCDM_S_XXzHr9lWzesvLwBSNlssF9TQ9fc')
+                        .then(response => {
+                            changedMarker.eventLocation = response.data.results[0].formatted_address;
+                            const time = new Date(changedMarker.time);
+                            let minutes = time.getMinutes();
+                            minutes = minutes < 10 ? '0' + minutes : minutes;
+                            changedMarker.time = time.getHours() + ":" + minutes;
+                            reef.eventMarkers[index] = changedMarker;
+                            reef.$forceUpdate();
+                        })
+                        .catch(e => {
+                            console.log(e)
+                        });
                 });
             },
             getIcon(attendance, litMeter) {

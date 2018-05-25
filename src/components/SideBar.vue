@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import firebase from 'firebase';
+    import      firebase from 'firebase';
     import geolib from 'geolib';
     import GoogleMaps from "./GoogleMaps";
     import {has as _has} from 'lodash';
@@ -46,9 +46,9 @@
         components: {GoogleMaps},
         data() {
             return {
-                hasVoted: false,
                 withinAllowedDistance: false,
-                errorMessage: ''
+                errorMessage: '',
+                votedMarkers: []
             }
         },
         updated() {
@@ -66,7 +66,10 @@
         props: ["marker", "show", "currentLocation"],
         computed: {
             canVote() {
-                return this.withinAllowedDistance && !this.hasVoted;
+                return this.withinAllowedDistance && !this.hasVotedForCurrentEvent;
+            },
+            hasVotedForCurrentEvent() {
+                return this.votedMarkers.includes(this.marker.id);
             }
         },
         methods: {
@@ -88,7 +91,7 @@
                     litMeter: this.marker.litMeter
                 });
 
-                this.hasVoted = true;
+                this.votedMarkers.push(this.marker.id);
                 this.updateCanVote();
             },
             checkDistance() {
@@ -115,12 +118,12 @@
                 }
             },
             updateErrorMessage() {
-                if (!this.withinAllowedDistance && this.hasVoted) {
+                if (!this.withinAllowedDistance && this.hasVotedForCurrentEvent) {
                     this.errorMessage = ERROR_BOTH;
                 } else if (!this.withinAllowedDistance) {
                     this.errorMessage = ERROR_DISTANCE;
-                } else if (this.hasVoted) {
-                    this.errorMessage = ERROR_BOTH;
+                } else if (this.hasVotedForCurrentEvent) {
+                    this.errorMessage = ERROR_VOTED;
                 }
             }
         }
