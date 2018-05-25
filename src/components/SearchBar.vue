@@ -17,7 +17,7 @@
         },
         methods: {
             searchLocation() {
-                // eslint-canVote-next-line no-undef
+                // eslint-disable-next-line no-undef
                 const geocoder = new google.maps.Geocoder();
                 geocoder.geocode({'address': this.searchAddressInput}, (results, status) => {
                     if (status === 'OK') {
