@@ -1,11 +1,11 @@
 <template>
     <div>
         <search-bar v-on:current-location-changed="locationChanged"></search-bar>
-        <GmapMap :center="currentLocation"
+        <GmapMap :center="centeredLocation"
                  :options="mapOptions"
                  v-on:click="closeSideBar"
                  class="map">
-            <GmapMarker :position="locationMarkerPosition"
+            <GmapMarker :position="currentLocation"
                         :clickable="false"></GmapMarker>
 
             <GmapCluster :minimumClusterSize="3"
@@ -49,6 +49,7 @@
                     lat: 47.370000,
                     lng: 8.542297
                 },
+                centeredLocation: {},
                 locationMarkerPosition: {
                     lat: 47.370000,
                     lng: 8.542297
@@ -66,30 +67,49 @@
                 eventMarker: {
                     valid: false
                 },
-                showSidebar: false
+                showSidebar: false,
+                watchId: 0
             }
         },
+        created() {
+            this.getLocation();
+        },
+        beforeDestroy() {
+            navigator.geolocation.clearWatch(this.watchId);
+        },
         mounted() {
-            this.geolocation();
             this.getMarkers();
             this.changeMarker();
+            this.centeredLocation = this.currentLocation;
         },
         methods: {
             locationChanged(location) {
-                this.currentLocation = location;
-                this.locationMarkerPosition = location;
+                this.centeredLocation = location;
             },
-            geolocation() {
+            getLocation() {
                 navigator.geolocation.getCurrentPosition((position) => {
                     this.currentLocation = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    this.locationMarkerPosition = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    }
+                    this.centeredLocation = this.currentLocation;
+                    this.watchLocation();
                 });
+            },
+            watchLocation() {
+                const options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                };
+                this.watchId = navigator.geolocation.watchPosition(
+                    (position) => {
+                        this.currentLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                    },
+                    () => {}, options);
             },
             getMarkers() {
                 const ref = firebase.database().ref('events');
