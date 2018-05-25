@@ -94,6 +94,7 @@
             getMarkers() {
                 const ref = firebase.database().ref('events');
                 const eventMarkers = [];
+                const self = this;
                 ref.orderByChild("litMeter").on("child_added", function (snapshot) {
 
                     let marker = snapshot.val();
@@ -105,14 +106,13 @@
                             minutes = minutes < 10 ? '0' + minutes : minutes;
                             marker.time = time.getHours() + ":" + minutes;
                             eventMarkers.push(marker);
+                            self.eventMarkers = eventMarkers;
+                            self.$forceUpdate();
                         })
                         .catch(e => {
                             console.log(e)
                         });
                 });
-                this.eventMarkers = eventMarkers;
-                this.$forceUpdate();
-
             },
             changeMarker() {
                 const ref = firebase.database().ref('events');
